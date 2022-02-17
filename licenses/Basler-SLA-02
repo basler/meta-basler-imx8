@@ -1,0 +1,137 @@
+BASLER SOFTWARE LICENSE AGREEMENT
+
+-AD001131 version 02-
+
+IMPORTANT - PLEASE READ CAREFULLY
+
+THIS SOFTWARE LICENSE AGREEMENT ("AGREEMENT") IS A LEGAL AGREEMENT BETWEEN YOU
+AND BASLER AG ("BASLER") FOR THE BASLER SOFTWARE PRODUCTS ACCOMPANYING THIS
+AGREEMENT, WHICH INCLUDES COMPUTER SOFTWARE AND MAY INCLUDE "ONLINE" OR
+ELECTRONIC DOCUMENTATION, ASSOCIATED MEDIA, AND PRINTED MATERIALS ("SOFTWARE").
+BEFORE YOU CLICK ON THE "ACCEPT" BUTTON BELOW AND COMPLETE THE INSTALLATION
+PROCESS, OR BEFORE YOU DOWNLOAD, INSTALL OR USE THE SOFTWARE, CAREFULLY READ
+THIS AGREEMENT. BY CLICKING THE "ACCEPT" BUTTON, OR BY DOWNLOADING, INSTALLING
+OR USING THE SOFTWARE, YOU CONSENT TO THE TERMS OF THIS AGREEMENT AND YOU AGREE
+TO BE BOUND BY THIS AGREEMENT. IF YOU DO NOT AGREE TO THE TERMS AND CONDITIONS
+OF THIS AGREEMENT, CLICK THE "CANCEL" BUTTON AND/ OR DO NOT DOWNLOAD, INSTALL
+OR USE THE SOFTWARE.
+
+1. SOFTWARE OF THIRD-PARTY MANUFACTURERS. Notwithstanding the terms and
+conditions of this AGREEMENT, all or any portion of the SOFTWARE which
+constitutes non-proprietary BASLER software or software provided under
+Open-source license by third parties ("third-party software"), is licensed to
+you subject to the terms and conditions of the software license agreement
+accompanying such third-party software. Use of the third-party software by you
+shall be governed entirely by the terms and conditions of such license. You can
+find the license terms and conditions next to this file in system specific
+locations or contact BASLER support. BASLER software includes some open source
+software source code that may be used and modified by anyone and everyone,
+provided they, in turn, make it available to everyone else with the same
+licensing agreement. Please contact BASLER support for the original source code
+of components licensed under Open-source licenses.
+
+2. GRANT OF LICENSE TERMINATION IN CASE OF VIOLATION. BASLER grants you a
+personal, non-exclusive, non-transferable right to use the SOFTWARE provided
+that you comply with all terms and conditions of this AGREEMENT. Should the
+user violate the provisions of this Agreement, BASLER shall have the right to
+terminate the Agreement immediately. In this case the user must delete the
+software including all copies or return it to BASLER.
+
+3. PERMITTED USE OF THE SOFTWARE. You may install and use the SOFTWARE as whole
+or in parts (single files, e.g. DLLs etc.) on an unlimited number of computers.
+You may solely use the SOFTWARE for the purpose to operate a BASLER camera
+product.
+
+4. TRANSFER. You may not rent, lease, sub-license, or lend the SOFTWARE or any
+portions thereof to others, except as expressly granted in this section 4. You
+may transfer the SOFTWARE in whole or in parts (single files, e.g. DLLs etc.)
+to another individual/entity provided that the transferee accepts the terms of
+this AGREEMENT.
+
+5. RESTRICTIONS. You may not copy or use the SOFTWARE except as set forth in
+this AGREEMENT. You may not remove any proprietary notices or labels on the
+SOFTWARE; any copies that you are permitted to make pursuant to this Agreement
+must contain the same copyright and other proprietary notices that appear on
+and in the SOFTWARE. Notwithstanding the aforementioned, you may make copies as
+required by law.
+
+6. LIMITATION ON REVERSE ENGINEERING. You agree not to modify, adapt, reverse
+engineer, decompile, or disassemble the SOFTWARE or otherwise attempt to
+discover the source code of the SOFTWARE or algorithms contained therein or
+create any derivative works from the SOFTWARE, except as expressly provided in
+this AGREEMENT.
+
+7. PROPRIETARY RIGHTS. All intellectual property rights in the SOFTWARE are
+owned by BASLER or its suppliers and are protected by copyright laws and
+international copyright treaties. You shall not remove any product
+identification, copyright notices or proprietary restrictions from the SOFTWARE.
+
+8. DISCLAIMER OF WARRANTIES. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW,
+BASLER AND ITS SUPPLIERS PROVIDE THE SOFTWARE PRODUCT "AS IS" AND WITH ALL
+FAULTS, AND HEREBY DISCLAIM ALL OTHER WARRANTIES AND CONDITIONS, EITHER
+EXPRESS, IMPLIED, OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, WARRANTIES OF
+TITLE AND NON-INFRINGEMENT, ANY IMPLIED WARRANTIES, DUTIES OR CONDITIONS OF
+MERCHANTABILITY, OF FITNESS FOR A PARTICULAR PURPOSE, AND OF LACK OF VIRUSES
+ALL WITH REGARD TO THE SOFTWARE PRODUCT. Some states/jurisdictions do not allow
+exclusion of implied warranties or limitations on the duration of implied
+warranties, so the above disclaimer may not apply to you in its entirety.
+
+9. LIMITATION OF LIABILITY.
+
+9.1 BASLER SHALL SOLELY BE LIABLE, WITHOUT LIMTIATION, FOR ANY DAMAGES
+RESULTING FROM (i) INJURY, BODILY HARM OR LOSS OF LIFE DUE TO A NEGLIGENT OR
+INTENTIONAL BREACH OF DUTY BY BASLER OR BASLER’s REPRESENTATIVES, (ii) ANY
+VIOLIATION OF AN OBLIGATION WHICH IS ESSENTIAL FOR THE PURPOSE OF THIS
+AGREEMENT (Kardinalplflicht) AND/OR (iii) A GROSSLY NEGLIGENT OR INTENTIONAL
+BREACH OF THIS AGREEMENT BY BASLER OR BASLER’s REPRESENTATIVES.
+
+9.2 BASLERS LIABILITY UNDER THE PRODUCT LIABILITY ACT (ProdHaftG) REMAINS
+UNAFFECTED.
+
+9.3 IN ALL OTHER CASES THAN THE AFOREMENTIONED, BASLER SHALL NOT BE LIABLE FOR
+ANY DAMAGES (WETHER OR NOT SPECIAL, INCIDENTAL, INDIRECT, OR CONSEQUENTIAL
+DAMAGES) INCLUDING, BUT NOT LIMITED TO, DAMAGES FOR LOSS OF PROFITS OR
+CONFIDENTIAL OR OTHER INFORMATION, FOR BUSINESS INTERRUPTION, FOR PERSONAL
+INJURY, FOR LOSS OF PRIVACY, ARISING OUT OF OR IN ANY WAY RELATED TO THE USE OF
+OR INABILITY TO USE THE SOFTWARE PRODUCT, OR OTHERWISE IN CONNECTION WITH ANY
+PROVISION OF THIS AGREEMENT, EVEN IF BASLER OR ANY SUPPLIER HAS BEEN ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGES AND EVEN IF THE REMEDY FAILS OF ITS ESSENTIAL
+PURPOSE, UNLESS SUCH DAMAGES OCCUR AS A RESULT OF AN INTENTIONAL BREACH OF THIS
+AGREEMENT BY BASLER AND/OR ITS REPRESENTATIVES.
+
+9.4 In cases of any breach of contract by BASLER, for which the liability of
+BASLER is not excluded under Section 9.3 above, BASLER’s liability shall be
+limited to the amount of damages foreseeable under and typical for the
+agreement.
+
+10. GOVERNING LAW AND JURISDICTION. This AGREEMENT shall be considered to have
+been entered into and construed in accordance with the laws of Germany,
+excluding its provisions on the conflict of laws and the CISG rules. For all
+controversies between the parties or claims based on this AGREEMENT the
+District Court Hamburg shall have jurisdiction. Failure by either party to
+enforce any term of this AGREEMENT shall not be deemed to be a waiver of future
+enforcement of that term or any other term.
+
+10.2 You agree that this AGREEMENT shall be enforceable in a court of equity
+and acknowledges that a breach by you of the terms of this AGREEMENT may not be
+adequately remedied by an award of damages and that BASLER shall therefore be
+entitled to injunctive or other equitable relief in the event of such breach.
+You further agree that the election by BASLER to seek equitable relief shall
+not preclude it from also seeking relief at law.
+
+11. GENERAL.
+
+11.1 This AGREEMENT is the complete and exclusive statement of the agreement
+between the parties and supersedes all prior agreements and communications with
+respect to the subject matter. This AGREEMENT shall be binding upon and inure
+to the benefit of the parties hereto and their respective successors and
+assigns.
+
+11.2 This AGREEMENT can only be modified by a written document signed by both
+parties.
+
+11.3 If any provision of this AGREEMENT is held invalid, the offending clause
+will be deleted and replaced by a clause which is valid and comes as close as
+possible to the offended clause. In any case the invalidity of one or more
+clauses shall not affect the validity of the remaining clauses, and the
+remainder of this AGREEMENT will continue in full force and effect.

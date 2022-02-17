@@ -1,0 +1,20 @@
+# Startup configuration for the isp_media_server
+
+# defaultmode configurations in which the sensors start
+# 500 -> 500MHz Pixelclock on ISP0
+# 266 -> 266MHz Pixelclock in ISP1 or in dual configuration
+# these settings depend on the device tree used
+
+
+MODE_DAA3840_30MC_500=4K30
+MODE_DAA3840_30MC_266=1080P60
+# alternative settings
+# 500: 4K30 / 1080P60 / 4K30_HDR / 1080P60_HDR
+# 266: 1080P60 / 1080P25_HDR
+
+MODE_DAA2500_60MC_500=5M30
+MODE_DAA2500_60MC_266=1080P60
+# alternative settings
+# 500: 5M30 / 1080P60
+# 266: 1080P60
+

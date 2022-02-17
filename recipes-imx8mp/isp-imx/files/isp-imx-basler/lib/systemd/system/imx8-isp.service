@@ -1,0 +1,19 @@
+[Unit]
+Description=ISP i.MX 8Mplus daemon
+
+StartLimitIntervalSec=500
+StartLimitBurst=5
+
+[Service]
+# configure the default sensor mode
+Environment=SENSOR_MODE=basler_1080p60
+EnvironmentFile=/etc/default/imx8-isp
+
+Restart=on-failure
+RestartSec=5s
+# ENXIO            
+RestartPreventExitStatus=6
+ExecStart=/opt/imx8-isp/bin/start_isp.sh 
+
+[Install]
+WantedBy=multi-user.target
