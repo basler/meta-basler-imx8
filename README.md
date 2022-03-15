@@ -13,8 +13,8 @@ Prerequisites
 -------------
 Make sure you have a yocto working environment on your PC before you continue with the instructions.
 The instructions here are based on NXP's user guide [i.MX_Yocto_Project_User's_Guide.pdf](https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf). It is continously updated by
-NXP as new software versions are released, and may therefore apply to a version later than #KERNEL_VERSION#.
-NXP provides further documentation for the specific release [lf-5.10.72-2.2.0](https://www.nxp.com/webapp/Download?colCode=Llf-5.10.72-2.2.0_LINUX_DOCS) targeted by this readme.
+NXP as new software versions are released, and may therefore apply to a version later than 5.10.72-2.2.0.
+NXP provides further documentation for the specific release [5.10.72-2.2.0](https://www.nxp.com/webapp/Download?colCode=L5.10.72_2.2.0_LINUX_DOCS) targeted by this readme.
 
 The user's guide includes information about how to establish the yocto working environment and details about NXP yocto builds.
 
@@ -44,7 +44,7 @@ To build a yocto image for a NXP i.MX8 board
 2.  Check out the NXP imx yocto Board Support Package (BSP) to the working folder and grab all sources:
     ```
         $ cd imx-yocto-bsp
-        $ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-hardknott -m imx-lf-5.10.72-2.2.0.xml
+        $ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-hardknott -m imx-5.10.72-2.2.0.xml
         $ repo sync
     ```
 
@@ -52,7 +52,7 @@ To build a yocto image for a NXP i.MX8 board
     ```
         $ cd imx-yocto-bsp/sources
         $ git clone --branch hardknott https://github.com/basler/meta-basler-tools.git
-        $ git clone --branch hardknott-lf-5.10.72-2.2.0 https://github.com/basler/meta-basler-imx8.git
+        $ git clone --branch hardknott-5.10.72-2.2.0 https://github.com/basler/meta-basler-imx8.git
         $ cd ..
         It should look like this:
         └── sources
@@ -94,11 +94,11 @@ To build a yocto image for a NXP i.MX8 board
     ```
 
 7.  Call bitbake to create the required image.
-    Building the image can take several hours. TODO: is fsl-image-validation-imx really the best proposal?
+    Building the image can take several hours.
     For minimal testing
     ```
         $ cd imx-yocto-bsp/build-xwayland-<MACHINE>/
-        $ bitbake fsl-image-validation-imx
+        $ bitbake imx-image-multimedia
     ```
     Including all machine learning support
     ```
