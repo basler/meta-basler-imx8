@@ -3,7 +3,11 @@ PR = "r0"
 
 PACKAGE_FILE_NAME="${BPN}_${PV}_arm64.selfsh"
 
-SRC_URI = "https://artifacts.baslerweb.com/artifactory/embedded-vision-public/packages/${BPN}/${PACKAGE_FILE_NAME}"
+SRC_URI = "https://artifacts.baslerweb.com/artifactory/embedded-vision-public/packages/${BPN}/${PACKAGE_FILE_NAME};name=tarball \
+           file://set-gentl-path.sh \
+"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 INSANE_SKIP_${PN} = "ldflags"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
@@ -52,8 +56,7 @@ do_install() {
     find ${D} -perm 700 -exec chmod 755 {} \;
     find ${D} -perm 600 -exec chmod 644 {} \;
     
-    install -d "${D}/etc/profile.d/"
-    echo "export GENICAM_GENTL64_PATH=/opt/dart-bcon-mipi/lib" > "${D}/etc/profile.d/basler-dart-bcon-mipi.sh"
+    install -D "${WORKDIR}/set-gentl-path.sh" "${D}/etc/profile.d/${BPN}.sh"
 }
 
 FILES_${PN} += "/opt/*"

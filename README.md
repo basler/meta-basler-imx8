@@ -53,25 +53,6 @@ To build a yocto image for a NXP i.MX8 board
         $ cd imx-yocto-bsp/sources
         $ git clone --branch hardknott https://github.com/basler/meta-basler-tools.git
         $ git clone --branch hardknott-5.10.72-2.2.0 https://github.com/basler/meta-basler-imx8.git
-        $ cd ..
-        It should look like this:
-        └── sources
-            ├── base
-            ├── meta-basler-imx8
-            ├── meta-basler-tools
-            ├── meta-browser
-            ├── meta-clang
-            ├── meta-freescale
-            ├── meta-freescale-3rdparty
-            ├── meta-freescale-distro
-            ├── meta-imx
-            ├── meta-nxp-demo-experience
-            ├── meta-openembedded
-            ├── meta-python2
-            ├── meta-qt5
-            ├── meta-rust
-            ├── meta-timesys
-            └── poky
     ```
 
 4.  Set the DISTRO and MACHINE variables and do the fsl setup.
@@ -82,14 +63,16 @@ To build a yocto image for a NXP i.MX8 board
     ```
 
 5.  In the `imx-yocto-bsp/build-xwayland-<MACHINE>/` directory:
-    Append the following lines to the conf/bblayers.conf file to add the required meta layers for the Basler MIPI camera:
+    Append the following lines to the `conf/bblayers.conf` file to add the required meta layers for the Basler MIPI camera:
     ```
         BBLAYERS += "${BSPDIR}/sources/meta-basler-imx8"
         BBLAYERS += "${BSPDIR}/sources/meta-basler-tools"
     ```
 
-6.  Append the following lines to the `imx-yocto-bsp/build-xwayland-<MACHINE>/conf/local.conf` file
+6.  Please read the license files in `imx-yocto-bsp/sources/meta-basler-*/licenses/`. To accept the licenses and to 
+    install the required packages, append the following lines to  `imx-yocto-bsp/build-xwayland-<MACHINE>/conf/local.conf`:
     ```
+        ACCEPT_BASLER_EULA = "1"
         IMAGE_INSTALL_append = "packagegroup-dart-bcon-mipi"
     ```
 
@@ -110,30 +93,26 @@ To build a yocto image for a NXP i.MX8 board
     -   Set the SW4 switch to 0011 in order to boot from SD card.
 
     -   Flash SD card.
-        Insert an SD card of at least 4 GB size into an SD card writer and flash according to the operating system:
+        Insert an SD card of at least 4 GB size into an SD card writer and flash according to the operating system.
+
+        **Warning:** The commands below will execute dd as root and are able to destroy your system. You need to replace
+        `/dev/sdX` with the correct device name. `lsblk` helps in finding the correct device.
+
+        If the SD card already contains a file system, or partitions containing file systems, these may be automatically
+        mounted upon insertion by your desktop environment. If this happens to be the case, you need to unmount those file systems
+        prior to executing the `dd` command.
         
         ```
             $ cd imx-yocto-bsp/build-xwayland-<MACHINE>/
-            $ bzip2 -cd tmp/deploy/images/<MACHINE>/fsl-image-validation-imx-<MACHINE>.wic.bz2 | dd of=/dev/sdX bs=1M status=progress
+            $ bzip2 -cd tmp/deploy/images/<MACHINE>/imx-image-multimedia-<MACHINE>.tar.bz2 | sudo dd of=/dev/sdX bs=1M status=progress
             $ sync
         ```
         or if image is imx-image-full:
         ```
             $ cd imx-yocto-bsp/build-xwayland-<MACHINE>/
-            $ bzip2 -cd tmp/deploy/images/<MACHINE>/imx-image-full-<MACHINE>.sdcard.bz2 | dd of=/dev/sdX bs=1M status=progress
+            $ bzip2 -cd tmp/deploy/images/<MACHINE>/imx-image-full-<MACHINE>.tar.bz2 | sudo dd of=/dev/sdX bs=1M status=progress
             $ sync
         ```
-
-        The '/dev/sdX' device in the above command is not to be taken literally, it is a placeholder for the actual block
-        device created by your system, so you need to find that device by comparing the list of existing devices matching the
-        pattern '/dev/sd?' prior to card insertion to the one after that.
-
-        Writing to the SD card of course requires sufficient access permissions, which would usually mean that the command must
-        be executed by the 'root' user.
-
-        If the SD card already contains a file system, or partitions containing file systems, these may be automatically
-        mounted upon insertion by your desktop environment. If this happens to be the case, you need to unmount those file systems
-        prior to executing the 'dd' command.
 
         After flashing the image to the SD card, there will be two partitions /dev/sdX1 and /dev/sdX2, the latter containing the root file system.
         Depending on the size of your SD card, there may be some unallocated space after the rootfs partition, which can be reclaimed by
@@ -206,11 +185,11 @@ To build a yocto image for a NXP i.MX8 board
 
 10. To start the Basler pylon Viewer, enter the following line in the Wayland terminal window:
     ```
-    # GENICAM_GENTL64_PATH=/opt/dart-bcon-mipi/lib /opt/pylon6/bin/pylonviewer
+        $ GENICAM_GENTL64_PATH=/opt/dart-bcon-mipi/lib /opt/pylon/bin/pylonviewer
     ```
     or use the shorthand:
     ```
-    # pylon
+        $ pylon
     ```
 
     Now you can operate the camera
@@ -225,18 +204,24 @@ Supplementary Information
 -   re 7. Optionally, it is possible to use the bitbake populate_sdk command to create a yocto SDK which enables 
     local cross compilation for the `<MACHINE>` target device. This can be used to develop own applications without using the yocto image build.
     ```
-      $ bitbake -c populate_sdk fsl-image-validation-imx
+        $ bitbake -c populate_sdk fsl-image-validation-imx
     ```
 
 -   remote X support: In order to establish a remote ssh -X session call on host
     ```
-    $ ssh -X root@<ip-address>
-    Once the remote connection is established call
-    # GENICAM_GENTL64_PATH=/opt/dart-bcon-mipi/lib /opt/pylon6/bin/pylonviewer
+        $ ssh -X root@<ip-address>
+        # Once the remote connection is established call
+        $ GENICAM_GENTL64_PATH=/opt/dart-bcon-mipi/lib /opt/pylon6/bin/pylonviewer
     ```
 
 -   re 10. gstreamer usage for daA2500-60mc and daA3840-30mc
     it is possible to display live video via gstreamer using:
     ```
-    gst-launch-1.0 -v v4l2src device=/dev/video2 ! waylandsink
+        $ gst-launch-1.0 -v v4l2src device=/dev/video2 ! waylandsink
+    ```
+
+-   To speedup the flash process we recommend to use the bmaptool.
+    The correcsponding flash commandline is:
+    ```
+        $ sudo bmaptool copy tmp/deploy/images/<MACHINE>/imx-image-multimedia-<MACHINE>.tar.bz2 /dev/sdX
     ```

@@ -6,7 +6,8 @@ do_install_append() {
     install -d ${D}
 }
 
-RDEPENDS_${PN} = "basler-daa3840-30mc-imx-isp-driver"
+RDEPENDS_${PN} = "basler-daa3840-30mc-imx-isp-driver \
+                  basler-daa2500-60mc-imx-isp-driver "
 
 # Still allow it to be installed
 ALLOW_EMPTY_${PN} = "1"
