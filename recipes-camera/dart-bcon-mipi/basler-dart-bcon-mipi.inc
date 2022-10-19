@@ -7,17 +7,17 @@ SRC_URI = "https://artifacts.baslerweb.com/artifactory/embedded-vision-public/pa
            file://set-gentl-path.sh \
 "
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
-INSANE_SKIP_${PN} = "ldflags"
+INSANE_SKIP:${PN} = "ldflags"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
 
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     kernel-module-basler-camera \
 "
 
-RRECOMMENDS_${PN} = "\
+RRECOMMENDS:${PN} = "\
     pylon \
     python3-pypylon \
 "
@@ -52,12 +52,8 @@ do_install[dirs] += "${D}/opt"
 
 do_install() {
     cp -a --no-preserve=ownership ${S}/* ${D}
-    # fix permissions for group and others
-    find ${D} -perm 700 -exec chmod 755 {} \;
-    find ${D} -perm 600 -exec chmod 644 {} \;
-    
     install -D "${WORKDIR}/set-gentl-path.sh" "${D}/etc/profile.d/${BPN}.sh"
 }
 
-FILES_${PN} += "/opt/*"
-FILES_${PN} += "/etc/"
+FILES:${PN} += "/opt/*"
+FILES:${PN} += "/etc/"

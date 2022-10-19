@@ -4,27 +4,27 @@
 PARALLEL_MAKE = ""
 PARALLEL_MAKEINST = ""
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/u-boot-imx:"
-SRC_URI_append_imx8mqevk = " file://0001-add-CONFIG_DEFAULT_FDT_FILE-to-imx8mq_evk-in-u-boot.patch"
+FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-imx:"
+SRC_URI:append:imx8mqevk = " file://0001-add-CONFIG_DEFAULT_FDT_FILE-to-imx8mq_evk-in-u-boot.patch"
 
 patch_uboot_defconfig () {
     sed -i -e '/^[	 ]*CONFIG_DEFAULT_FDT_FILE[	 ]*=/d' ${S}/configs/$1
     echo 'CONFIG_DEFAULT_FDT_FILE="'$2'"' >>${S}/configs/$1
 }
 
-do_configure_prepend_imx8mqevk () {
+do_configure:prepend:imx8mqevk () {
     patch_uboot_defconfig imx8mq_evk_defconfig imx8mq-evk-basler-camera.dtb
 }
 
-do_configure_prepend_imx8mmevk () {
+do_configure:prepend:imx8mmevk () {
     patch_uboot_defconfig imx8mm_evk_defconfig imx8mm-evk-basler-camera.dtb
 }
 
-do_configure_prepend_imx8mpevk () {
+do_configure:prepend:imx8mpevk () {
     patch_uboot_defconfig imx8mp_evk_defconfig imx8mp-evk-basler.dtb
 }
 
-do_configure_prepend_imx8mmddr4evk () {
+do_configure:prepend:imx8mmddr4evk () {
     patch_uboot_defconfig imx8mm_ddr4_evk_defconfig imx8mm-ddr4-evk-basler-camera.dtb
 }
 

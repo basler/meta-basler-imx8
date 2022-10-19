@@ -1,0 +1,361 @@
+From 832a7600ebb44742a9bb98ac81b115a8ca418bf5 Mon Sep 17 00:00:00 2001
+From: Stefan Klug <stefan.klug@baslerweb.com>
+Date: Wed, 22 Dec 2021 14:59:30 +0100
+Subject: [PATCH 20/20] [imx8mp] arm64: dts: imx8mp: Add DTS for Basler camera
+
+---
+ arch/arm64/boot/dts/freescale/Makefile        |   2 +
+ .../freescale/imx8mp-evk-basler-isi0-isi1.dts | 115 +++++++++++++++++
+ .../dts/freescale/imx8mp-evk-basler-isi0.dts  |  79 ++++++++++++
+ .../imx8mp-evk-basler-mixed-isp-isi.dts       | 116 ++++++++++++++++++
+ 4 files changed, 312 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+ create mode 100644 arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+
+diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
+index 87006db85..a7f8e3c79 100644
+--- a/arch/arm64/boot/dts/freescale/Makefile
++++ b/arch/arm64/boot/dts/freescale/Makefile
+@@ -116,8 +116,10 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it626
+ 			  imx8mp-evk-pcie-ep.dtb  imx8mp-evk-rpmsg.dtb imx8mp-evk-ecspi-slave.dtb \
+ 			  imx8mp-evk-jdi-wuxga-lvds-panel.dtb imx8mp-evk-flexcan2.dtb \
+ 			  imx8mp-evk-root.dtb imx8mp-evk-inmate.dtb imx8mp-evk-ov2775.dtb \
++			  imx8mp-evk-basler-isi0.dtb imx8mp-evk-basler-isi0-isi1.dtb \
+ 			  imx8mp-evk-ov2775-ov5640.dtb imx8mp-evk-basler-ov5640.dtb imx8mp-evk-basler.dtb \
+ 			  imx8mp-evk-basler-ov2775.dtb imx8mp-evk-dual-basler.dtb \
++			  imx8mp-evk-basler-mixed-isp-isi.dtb \
+ 			  imx8mp-evk-dual-ov2775.dtb imx8mp-evk-spdif-lb.dtb \
+ 			  imx8mp-evk-sof-wm8960.dtb imx8mp-evk-dsp.dtb \
+ 			  imx8mp-evk-iqaudio-dacplus.dtb imx8mp-evk-iqaudio-dacpro.dtb imx8mp-evk-hifiberry-dacplus.dtb \
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts
+new file mode 100644
+index 000000000..8a5f2b1ac
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts
+@@ -0,0 +1,115 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2020 Basler AG
++ * Copyright 2020 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include "imx8mp-evk.dts"
++
++&i2c2 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x00>;
++		status = "okay";
++
++		port {
++			basler_ep_0: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <600000000>;
++				remote-endpoint = <&mipi_csi0_ep>;
++			};
++		};
++	};
++};
++
++
++&mipi_csi_0 {
++	status = "okay";
++
++	port@0 {
++		mipi_csi0_ep: endpoint {
++			remote-endpoint = <&basler_ep_0>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++&i2c3 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x01>;
++		status = "okay";
++
++		port {
++			basler_ep_1: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <532000000>;
++				remote-endpoint = <&mipi_csi1_ep>;
++			};
++		};
++	};
++};
++
++
++&mipi_csi_1 {
++	status = "okay";
++
++	port@1 {
++		mipi_csi1_ep: endpoint {
++			remote-endpoint = <&basler_ep_1>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++
++&cameradev {
++	status = "okay";
++};
++
++&isi_0 {
++	status = "okay";
++	dma-coherent;
++	bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isi_1 {
++	status = "okay";
++	dma-coherent;
++	bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isp_0 {
++	status = "disabled";
++};
++
++&isp_1 {
++	status = "disabled";
++};
++
++&dewarp {
++	status = "disabled";
++};
++
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+new file mode 100644
+index 000000000..58c5a8da5
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0.dts
+@@ -0,0 +1,79 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2020 Basler AG
++ * Copyright 2020 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include "imx8mp-evk.dts"
++
++&i2c2 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x00>;
++		status = "okay";
++
++		port {
++			basler_ep_0: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <600000000>;
++				remote-endpoint = <&mipi_csi0_ep>;
++			};
++		};
++	};
++};
++
++
++&mipi_csi_0 {
++	status = "okay";
++
++	port@0 {
++		mipi_csi0_ep: endpoint {
++			remote-endpoint = <&basler_ep_0>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++&cameradev {
++	status = "okay";
++};
++
++&isi_0 {
++	status = "okay";
++	dma-coherent;
++	bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isi_1 {
++	status = "disabled";
++	fsl,chain_buf;
++};
++
++&isp_0 {
++	status = "disabled";
++};
++
++&isp_1 {
++	status = "disabled";
++};
++
++&dewarp {
++	status = "disabled";
++};
++
+diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+new file mode 100644
+index 000000000..923083ef1
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
+@@ -0,0 +1,116 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
++/*
++ * Copyright (C) 2020 Basler AG
++ * Copyright 2020 NXP
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU General Public License
++ * as published by the Free Software Foundation; either version 2
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ */
++
++#include "imx8mp-evk.dts"
++
++&i2c2 {
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera_vvcam@36 {
++		compatible = "basler,basler-camera-vvcam", "basler-camera-vvcam";
++		reg = <0x36>;
++		csi_id = <0x00>;
++		status = "okay";
++
++		port {
++			basler_ep_0: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <750000000>;
++				max-lane-frequency = /bits/ 64 <750000000>;
++				max-pixel-frequency = /bits/ 64 <500000000>;
++				max-data-rate = /bits/ 64 <0>;
++				remote-endpoint = <&mipi_csi0_ep>;
++			};
++		};
++	};
++};
++
++&mipi_csi_0 {
++	status = "okay";
++
++	port@0 {
++		mipi_csi0_ep: endpoint {
++			remote-endpoint = <&basler_ep_0>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++&i2c3 {
++	status = "okay";
++	/delete-node/ov5640_mipi@3c;
++
++	basler_camera@36 {
++		compatible = "basler,basler-camera", "basler-camera";
++		reg = <0x36>;
++		csi_id = <0x01>;
++		status = "okay";
++
++		port {
++			basler_ep_1: endpoint {
++				data-lanes = <1 2 3 4>;
++				clock-lanes = <0>;
++				link-frequencies = /bits/ 64 <532000000>;
++				remote-endpoint = <&mipi_csi1_ep>;
++			};
++		};
++	};
++};
++
++
++&mipi_csi_1 {
++	status = "okay";
++
++	port@1 {
++		mipi_csi1_ep: endpoint {
++			remote-endpoint = <&basler_ep_1>;
++			data-lanes = <4>;
++			csis-hs-settle = <16>;
++		};
++	};
++};
++
++&cameradev {
++	status = "okay";
++};
++
++&isi_0 {
++	status = "disabled";
++	dma-coherent;
++	bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isi_1 {
++	status = "okay";
++	dma-coherent;
++	bsl,dma-invalidate;
++	fsl,chain_buf;
++};
++
++&isp_0 {
++	status = "okay";
++};
++
++&isp_1 {
++	status = "disabled";
++};
++
++&dewarp {
++	status = "okay";
++};
+-- 
+2.33.1
+

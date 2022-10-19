@@ -45,7 +45,7 @@ set_libs_path () {
 load_module () {
     local MODULE="$1.ko"
     local MODULE_PARAMS="$2"
-    
+
     # return directly if already loaded.
     MODULENAME=`echo $1 | sed 's/-/_/g'`
     echo $MODULENAME
@@ -53,7 +53,7 @@ load_module () {
         echo "$1 already loaded."
         return 0
     fi
-    
+
     if [ "$LOCAL_RUN" == "1" ]; then
         MODULE_SEARCH=$RUN_SCRIPT_PATH
         MODULE_PATH=`find $MODULE_SEARCH -name $MODULE | head -1`
@@ -93,17 +93,17 @@ load_modules () {
         fi
     done
 
-    # force unload of imx8-media-dev to 
+    # force unload of imx8-media-dev to
     # workaround load order issue in 5.10 kernel
     rmmod imx8-media-dev
-    
+
     # and now clean load the modules
     for i in "${MODULES[@]}"
     do
         echo "Loading module $i ..."
         load_module $i
     done
-    
+
 }
 
 # parse command line arguments
@@ -116,7 +116,7 @@ while [ "$1" != "" ]; do
         -isp1 )
             shift
             ISP_CONFIG_1=$1
-        ;;        
+        ;;
         -l | --local )
             LOCAL_RUN="1"
             # search modules and libraries near this script
@@ -134,10 +134,10 @@ while [ "$1" != "" ]; do
 done
 
 # identify start configuration
-if [ "$ISP_CONFIG_0" != "" ] && [ "$ISP_CONFIG_1" == "" ]; then 
+if [ "$ISP_CONFIG_0" != "" ] && [ "$ISP_CONFIG_1" == "" ]; then
     STARTMODE="CAMERA0"
     ${RUN_SCRIPT_PATH}/Sensor_${ISP_CONFIG_0}_setup.sh 0
-elif [ "$ISP_CONFIG_0" == "" ] && [ "$ISP_CONFIG_1" != "" ]; then 
+elif [ "$ISP_CONFIG_0" == "" ] && [ "$ISP_CONFIG_1" != "" ]; then
     STARTMODE="CAMERA1"
     ${RUN_SCRIPT_PATH}/Sensor_${ISP_CONFIG_1}_setup.sh 1
 elif [ "$ISP_CONFIG_0" != "" ] && [ "$ISP_CONFIG_1" != "" ]; then

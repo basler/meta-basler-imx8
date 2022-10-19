@@ -3,7 +3,7 @@ PACKAGE_FILE_NAME="${BPN}_${PV}_arm64.selfsh"
 
 SRC_URI = "https://artifacts.baslerweb.com/artifactory/embedded-vision-public/packages/${BPN}/${PACKAGE_FILE_NAME}"
 
-INSANE_SKIP_${PN} = "ldflags file-rdeps already-stripped"
+INSANE_SKIP:${PN} = "ldflags file-rdeps already-stripped"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
 
@@ -39,12 +39,9 @@ do_install() {
     dest_dir=${D}/opt/imx8-isp/bin
     install -d $dest_dir
     cp -a --no-preserve=ownership ${S}/opt/* ${D}/opt/
-    # fix permissions for group and others
-    find ${D}/opt -perm 700 -exec chmod 755 {} \;
-    find ${D}/opt -perm 600 -exec chmod 644 {} \;
 }
 
-FILES_${PN} += "/opt/*"
-FILES_${PN} += "/etc/"
+FILES:${PN} += "/opt/*"
+FILES:${PN} += "/etc/"
 
 COMPATIBLE_MACHINE = "mx8mp"
