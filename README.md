@@ -44,15 +44,15 @@ To build a yocto image for a NXP i.MX8 board
 2.  Check out the NXP imx yocto Board Support Package (BSP) to the working folder and grab all sources:
     ```
         $ cd imx-yocto-bsp
-        $ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-hardknott -m imx-5.15.5-1.0.0.xml
+        $ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-honister -m imx-5.15.5-1.0.0.xml
         $ repo sync
     ```
 
 3.  Add the basler meta layers
     ```
         $ cd imx-yocto-bsp/sources
-        $ git clone --branch hardknott https://github.com/basler/meta-basler-tools.git
-        $ git clone --branch hardknott-5.15.5-1.0.0 https://github.com/basler/meta-basler-imx8.git
+        $ git clone --branch honister https://github.com/basler/meta-basler-tools.git
+        $ git clone --branch honister-5.15.5-1.0.0 https://github.com/basler/meta-basler-imx8.git
     ```
 
 4.  Set the DISTRO and MACHINE variables and do the fsl setup.
@@ -73,7 +73,7 @@ To build a yocto image for a NXP i.MX8 board
     install the required packages, append the following lines to  `imx-yocto-bsp/build-xwayland-<MACHINE>/conf/local.conf`:
     ```
         ACCEPT_BASLER_EULA = "1"
-        IMAGE_INSTALL_append = "packagegroup-dart-bcon-mipi"
+        IMAGE_INSTALL:append = "packagegroup-dart-bcon-mipi"
     ```
 
 7.  Call bitbake to create the required image.

@@ -1,6 +1,9 @@
 Changelog for meta-basler-imx8
 ==============================
 
+## 2022.10.26
+* Improved README
+
 ## 2022.10.20
 * Added yocto honister support
 * Updated GenTL producer to version 2.1.0
