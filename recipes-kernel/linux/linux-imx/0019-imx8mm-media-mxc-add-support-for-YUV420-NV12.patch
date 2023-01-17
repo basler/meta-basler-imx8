@@ -1,4 +1,4 @@
-From 75d53334f47c1df5f1902c6414e06832791f5fd3 Mon Sep 17 00:00:00 2001
+From defc02db0cc832d25b24c2d152a7fc295af1e7b8 Mon Sep 17 00:00:00 2001
 From: Tobias Klinke <TobiasAlexander.Klinke@baslerweb.com>
 Date: Fri, 12 Feb 2021 12:29:59 +0100
 Subject: [PATCH 19/20] [imx8mm] media: mxc: add support for YUV420 (NV12)
@@ -9,7 +9,7 @@ Subject: [PATCH 19/20] [imx8mm] media: mxc: add support for YUV420 (NV12)
  2 files changed, 35 insertions(+), 4 deletions(-)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index 1e4fc655d..2e4cef5f4 100644
+index 9c4d81c0d46f..d758dc6cfab0 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -132,6 +132,7 @@
@@ -78,7 +78,7 @@ index 1e4fc655d..2e4cef5f4 100644
  	pix->colorspace = V4L2_COLORSPACE_SRGB;
  	pix->ycbcr_enc = V4L2_MAP_YCBCR_ENC_DEFAULT(pix->colorspace);
 diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-index c0d62922b..a98b5d382 100644
+index 31d9345dc421..2b6eb78d3421 100644
 --- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 +++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 @@ -155,6 +155,7 @@ MODULE_PARM_DESC(debug, "Debug level (0-2)");
@@ -112,5 +112,5 @@ index c0d62922b..a98b5d382 100644
  
  	mipi_csis_write(state, MIPI_CSIS_ISPCONFIG_CH0, val);
 -- 
-2.33.1
+2.34.1
 

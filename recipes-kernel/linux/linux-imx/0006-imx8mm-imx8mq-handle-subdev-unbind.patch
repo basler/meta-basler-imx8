@@ -1,16 +1,16 @@
-From 08f96ab2a31c371b56c9c1fb4c4ae135aad94c13 Mon Sep 17 00:00:00 2001
+From c4d409e492fd1e1d3d5a3ee46452f34f9f9d991d Mon Sep 17 00:00:00 2001
 From: Thies Moeller <thies.moeller@baslerweb.com>
 Date: Fri, 25 Jun 2021 16:19:25 +0200
 Subject: [PATCH 06/20] [imx8mm, imx8mq] handle subdev unbind
 
 ---
- .../media/platform/imx8/mxc-mipi-csi2_yav.c   | 49 +++++++++++-----
- .../media/platform/mxc/capture/mx6s_capture.c | 24 ++++++--
- .../media/platform/mxc/capture/mxc_mipi_csi.c | 58 ++++++++++++++-----
- 3 files changed, 98 insertions(+), 33 deletions(-)
+ .../media/platform/imx8/mxc-mipi-csi2_yav.c   | 49 +++++++++++++-----
+ .../media/platform/mxc/capture/mx6s_capture.c | 24 +++++++--
+ .../media/platform/mxc/capture/mxc_mipi_csi.c | 50 ++++++++++++++-----
+ 3 files changed, 94 insertions(+), 29 deletions(-)
 
 diff --git a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
-index 0b200b64d..077a205a4 100644
+index 0b200b64d22a..077a205a41af 100644
 --- a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
 +++ b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
 @@ -481,13 +481,20 @@ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
@@ -110,7 +110,7 @@ index 0b200b64d..077a205a4 100644
  	return 0;
  }
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index cbd4cb4c0..ab6d7ed26 100644
+index 340bbb8e2b5c..dea9858f6c82 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -1818,13 +1818,13 @@ static const struct v4l2_ioctl_ops mx6s_csi_ioctl_ops = {
@@ -162,38 +162,29 @@ index cbd4cb4c0..ab6d7ed26 100644
  
  static int mx6s_csi_two_8bit_sensor_mode_sel(struct mx6s_csi_dev *csi_dev)
 diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-index f0ddcc1f5..912cf2fa6 100644
+index 3e543cfa5fc1..30a3f79755fc 100644
 --- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 +++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-@@ -926,18 +926,28 @@ static irqreturn_t mipi_csis_irq_handler(int irq, void *dev_id)
- }
- 
- static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
--			    struct v4l2_subdev *subdev,
--			    struct v4l2_async_subdev *asd)
-+				 struct v4l2_subdev *subdev,
-+				 struct v4l2_async_subdev *asd)
+@@ -931,6 +931,8 @@ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
  {
  	struct csi_state *state = notifier_to_mipi_dev(notifier);
  
 +	BUG_ON(subdev == NULL || state->sensor_sd != NULL);
 +
-+	if (subdev == NULL)
-+		return -EINVAL;
-+
- 	/* Find platform data for this sensor subdev */
+ 	if (subdev == NULL)
+ 		return -EINVAL;
+ 
+@@ -938,6 +940,14 @@ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
  	if (state->fwnode == dev_fwnode(subdev->dev))
  		state->sensor_sd = subdev;
  
--	if (subdev == NULL)
--		return -EINVAL;
 +	/* Initialize our control handler */
 +	v4l2_ctrl_handler_init(&state->ctrl_handler, 10);
 +	if (state->ctrl_handler.error) {
 +		return state->ctrl_handler.error;
 +	}
 +	state->mipi_sd.ctrl_handler = &state->ctrl_handler;
- 
++
 +	/* Merge subdev handler into our handler */
  	v4l2_ctrl_add_handler(state->mipi_sd.ctrl_handler, subdev->ctrl_handler,
  		  NULL, true);
@@ -279,5 +270,5 @@ index f0ddcc1f5..912cf2fa6 100644
  	pm_runtime_disable(&pdev->dev);
  	mipi_csis_pm_suspend(&pdev->dev, true);
 -- 
-2.33.1
+2.34.1
 

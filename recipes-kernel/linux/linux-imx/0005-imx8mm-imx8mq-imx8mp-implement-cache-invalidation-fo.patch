@@ -1,4 +1,4 @@
-From 50a43fbbb532f95788fcc1c3957197c2fde9787e Mon Sep 17 00:00:00 2001
+From 7052c7d6d5ba206dfdc11b740f9fe6efd72d8d99 Mon Sep 17 00:00:00 2001
 From: Thies Moeller <thies.moeller@baslerweb.com>
 Date: Fri, 25 Jun 2021 16:14:17 +0200
 Subject: [PATCH 05/20] [imx8mm, imx8mq, imx8mp] implement cache invalidation
@@ -15,7 +15,7 @@ Example with parameter:
  1 file changed, 21 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/media/common/videobuf2/videobuf2-dma-contig.c b/drivers/media/common/videobuf2/videobuf2-dma-contig.c
-index be376f301..941156fcb 100644
+index f8c65b040105..ad6a8544f6b3 100644
 --- a/drivers/media/common/videobuf2/videobuf2-dma-contig.c
 +++ b/drivers/media/common/videobuf2/videobuf2-dma-contig.c
 @@ -17,6 +17,8 @@
@@ -79,5 +79,5 @@ index be376f301..941156fcb 100644
  	buf->handler.put = vb2_dc_put;
  	buf->handler.arg = buf;
 -- 
-2.33.1
+2.34.1
 

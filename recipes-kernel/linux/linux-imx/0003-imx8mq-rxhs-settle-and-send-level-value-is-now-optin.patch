@@ -1,4 +1,4 @@
-From d42dcb085fe973531d455fbd3bfb340f64d291ff Mon Sep 17 00:00:00 2001
+From 40d69bf8133f1e5ac0dc6d2e2cc99dfafa4d6ed8 Mon Sep 17 00:00:00 2001
 From: ssuesens <sebastian.suesens@baslerweb.com>
 Date: Wed, 17 Apr 2019 11:11:11 +0200
 Subject: [PATCH 03/20] [imx8mq] rxhs-settle and send-level value is now
@@ -11,7 +11,7 @@ default value for send-level is 0x40
  1 file changed, 15 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
-index fa3fbef37..0b200b64d 100644
+index fa3fbef3752d..0b200b64d22a 100644
 --- a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
 +++ b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
 @@ -44,8 +44,6 @@ MODULE_PARM_DESC(debug, "Debug level (0-2)");
@@ -72,5 +72,5 @@ index fa3fbef37..0b200b64d 100644
  		 csi2dev->num_lanes, csi2dev->sd.name);
  
 -- 
-2.33.1
+2.34.1
 

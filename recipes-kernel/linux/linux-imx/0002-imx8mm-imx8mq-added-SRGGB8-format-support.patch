@@ -1,4 +1,4 @@
-From fc7ffac96db2fe8a4da4fdf0c31c58578f6d2054 Mon Sep 17 00:00:00 2001
+From 3c562eff122ea9537e5a3a4c5c0710113817ae82 Mon Sep 17 00:00:00 2001
 From: ssuesens <sebastian.suesens@baslerweb.com>
 Date: Tue, 16 Apr 2019 12:50:30 +0200
 Subject: [PATCH 02/20] [imx8mm, imx8mq] added SRGGB8 format support
@@ -8,7 +8,7 @@ Subject: [PATCH 02/20] [imx8mm, imx8mq] added SRGGB8 format support
  1 file changed, 8 insertions(+)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index a6e631bf6..9c2c69792 100644
+index a41516eea689..19d65de50447 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -266,6 +266,12 @@ static struct mx6s_fmt formats[] = {
@@ -41,5 +41,5 @@ index a6e631bf6..9c2c69792 100644
  			cr18 |= BIT_MIPI_DATA_FORMAT_RAW8;
  			break;
 -- 
-2.33.1
+2.34.1
 
