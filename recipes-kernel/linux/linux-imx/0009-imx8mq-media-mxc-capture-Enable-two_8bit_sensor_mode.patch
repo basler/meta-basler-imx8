@@ -1,4 +1,4 @@
-From 929955605020c167c9356ac598dfc1c27fb298bd Mon Sep 17 00:00:00 2001
+From 3e1ccca2094ff512ac1faac4e182dbdd2e01661a Mon Sep 17 00:00:00 2001
 From: Stefan Klug <klug.stefan@gmx.de>
 Date: Sun, 2 Feb 2020 19:14:24 +0000
 Subject: [PATCH 09/20] [imx8mq] media: mxc: capture: Enable
@@ -11,7 +11,7 @@ On the imx8mm Raw8 can also be transferred using 16bit per pixel clock
  1 file changed, 7 insertions(+), 15 deletions(-)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index eba3880de..bf0c85e3c 100644
+index afa48fdea11b..1ea7b6b57817 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -598,8 +598,11 @@ static void csi_dmareq_rff_enable(struct mx6s_csi_dev *csi_dev)
@@ -74,5 +74,5 @@ index eba3880de..bf0c85e3c 100644
  	of_id = of_match_node(mx6s_csi_dt_ids, csi_dev->dev->of_node);
  	if (!of_id)
 -- 
-2.33.1
+2.34.1
 

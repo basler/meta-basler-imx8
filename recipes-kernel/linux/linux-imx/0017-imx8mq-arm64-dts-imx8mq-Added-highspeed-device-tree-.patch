@@ -1,4 +1,4 @@
-From e3eddc160f77b8df2bf22f7f414db11516df05b6 Mon Sep 17 00:00:00 2001
+From 82ff2b6a12ff4e98d946605f622634ca1a806cd9 Mon Sep 17 00:00:00 2001
 From: "Koeller, Thomas" <Thomas.Koeller@baslerweb.com>
 Date: Fri, 11 Dec 2020 15:19:36 +0100
 Subject: [PATCH 17/20] [imx8mq] arm64: dts: imx8mq: Added highspeed device
@@ -15,7 +15,7 @@ frequency.
 
 diff --git a/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi-fullspeed.dts b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi-fullspeed.dts
 new file mode 100644
-index 000000000..388a90630
+index 000000000000..388a90630cb9
 --- /dev/null
 +++ b/arch/arm64/boot/dts/freescale/imx8mq-evk-basler-camera-csi-fullspeed.dts
 @@ -0,0 +1,36 @@
@@ -56,5 +56,5 @@ index 000000000..388a90630
 +	link-frequencies = /bits/ 64 <600000000>;
 +};
 -- 
-2.33.1
+2.34.1
 

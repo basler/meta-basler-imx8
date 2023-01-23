@@ -1,4 +1,4 @@
-From 12880d2af2246b682f4f6e59324bbace5086b14c Mon Sep 17 00:00:00 2001
+From 41605156140ede302699579a1acaad0321a7ddaa Mon Sep 17 00:00:00 2001
 From: Thies Moeller <thies.moeller@baslerweb.com>
 Date: Fri, 25 Jun 2021 16:29:22 +0200
 Subject: [PATCH 15/20] [imx8mm, imx8mq] mxc: capture: Add debug
@@ -10,7 +10,7 @@ Subject: [PATCH 15/20] [imx8mm, imx8mq] mxc: capture: Add debug
  2 files changed, 87 insertions(+)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index 7b31d86dd..4acd142e9 100644
+index 046ebc3fc9e8..5ce8a9955ea6 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -172,6 +172,34 @@
@@ -150,7 +150,7 @@ index 7b31d86dd..4acd142e9 100644
  		 sizeof(csi_dev->v4l2_dev.name), "CSI");
  
 diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-index c50ad3a0b..c0d62922b 100644
+index 84e5c8ab1858..31d9345dc421 100644
 --- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 +++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 @@ -288,6 +288,9 @@ struct csi_state {
@@ -192,5 +192,5 @@ index c50ad3a0b..c0d62922b 100644
  		u32 offset;
  
 -- 
-2.33.1
+2.34.1
 

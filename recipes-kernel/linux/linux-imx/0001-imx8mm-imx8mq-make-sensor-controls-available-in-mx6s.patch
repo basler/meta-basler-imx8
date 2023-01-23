@@ -1,4 +1,4 @@
-From 6a58205b19ecb734804cef592bf288403d258ad6 Mon Sep 17 00:00:00 2001
+From dc6d81d4188544362347c1b286a60d8cead9f25a Mon Sep 17 00:00:00 2001
 From: Michael Singer <michael.singer@baslerweb.com>
 Date: Thu, 14 Nov 2019 18:59:13 +0100
 Subject: [PATCH 01/20] [imx8mm, imx8mq] make sensor controls available in
@@ -20,7 +20,7 @@ Port to 5.4.3 and adjust to the following API changes:
  4 files changed, 142 insertions(+), 3 deletions(-)
 
 diff --git a/drivers/media/platform/imx8/mxc-mipi-csi2.h b/drivers/media/platform/imx8/mxc-mipi-csi2.h
-index 3306f5322..bfc60797c 100644
+index 3306f53220d2..bfc60797c448 100644
 --- a/drivers/media/platform/imx8/mxc-mipi-csi2.h
 +++ b/drivers/media/platform/imx8/mxc-mipi-csi2.h
 @@ -7,6 +7,7 @@
@@ -41,7 +41,7 @@ index 3306f5322..bfc60797c 100644
  	u32 hs_settle;
  	u32 send_level;
 diff --git a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
-index 9fa951b50..fa3fbef37 100644
+index 9fa951b50b50..fa3fbef3752d 100644
 --- a/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
 +++ b/drivers/media/platform/imx8/mxc-mipi-csi2_yav.c
 @@ -25,6 +25,7 @@
@@ -101,7 +101,7 @@ index 9fa951b50..fa3fbef37 100644
  	return 0;
  }
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index 39bef1e16..a6e631bf6 100644
+index 84f0e40e49e0..a41516eea689 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -1677,6 +1677,102 @@ static int mx6s_vidioc_enum_frameintervals(struct file *file, void *priv,
@@ -232,7 +232,7 @@ index 39bef1e16..a6e631bf6 100644
  	return ret;
  }
 diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-index db9101f57..f0ddcc1f5 100644
+index a722f38fedd5..3e543cfa5fc1 100644
 --- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 +++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 @@ -38,6 +38,7 @@
@@ -253,8 +253,8 @@ index db9101f57..f0ddcc1f5 100644
  
  /**
 @@ -935,6 +938,9 @@ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
- 	if (subdev == NULL)
- 		return -EINVAL;
+ 	if (state->fwnode == dev_fwnode(subdev->dev))
+ 		state->sensor_sd = subdev;
  
 +	v4l2_ctrl_add_handler(state->mipi_sd.ctrl_handler, subdev->ctrl_handler,
 +		  NULL, true);
@@ -302,5 +302,5 @@ index db9101f57..f0ddcc1f5 100644
  	pm_runtime_disable(&pdev->dev);
  	mipi_csis_pm_suspend(&pdev->dev, true);
 -- 
-2.33.1
+2.34.1
 
