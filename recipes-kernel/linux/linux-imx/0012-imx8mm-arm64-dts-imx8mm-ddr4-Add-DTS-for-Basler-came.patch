@@ -1,4 +1,4 @@
-From 3b4426f17738c6943243a9916d6cdb8626f3cfd0 Mon Sep 17 00:00:00 2001
+From 7100414569c3f1d0ca369621998d5a22cd97e5c4 Mon Sep 17 00:00:00 2001
 From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
 Date: Wed, 29 Jan 2020 13:51:53 +0100
 Subject: [PATCH 12/20] [imx8mm] arm64: dts: imx8mm-ddr4: Add DTS for Basler
@@ -11,10 +11,10 @@ Subject: [PATCH 12/20] [imx8mm] arm64: dts: imx8mm-ddr4: Add DTS for Basler
  create mode 100644 arch/arm64/boot/dts/freescale/imx8mm-ddr4-evk-basler-camera.dts
 
 diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
-index 9bfb76f29..aee5fde9b 100644
+index 8615d2525..dcc7a4e13 100644
 --- a/arch/arm64/boot/dts/freescale/Makefile
 +++ b/arch/arm64/boot/dts/freescale/Makefile
-@@ -235,4 +235,5 @@ dtb-$(CONFIG_ARCH_MXC) += imx8dxl-evk-root.dtb imx8dxl-evk-inmate.dtb
+@@ -239,4 +239,5 @@ dtb-$(CONFIG_ARCH_MXC) += imx93-9x9-qsb.dtb \
  dtb-$(CONFIG_ARCH_S32) += s32v234-evb.dtb \
  			  s32v234-sbc.dtb
  
@@ -91,5 +91,5 @@ index 000000000..c23318317
 +	};
 +};
 -- 
-2.33.1
+2.34.1
 

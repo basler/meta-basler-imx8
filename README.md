@@ -7,14 +7,14 @@ Introduction:
 -------------
 The following instructions help you to build yocto images. This will allow you to
 stream images from a Basler dart BCON for MIPI camera ("Basler MIPI camera" for short) used with an NXP i.MX8 board.
-You can save the images to an SD card and process them using the Basler pylon SDK and the pylonViewer app.
+You can save the images to an SD card and process them using the Basler pylon SDK and the pylon Viewer app.
 
 Prerequisites
 -------------
 Make sure you have a yocto working environment on your PC before you continue with the instructions.
 The instructions here are based on NXP's user guide [i.MX_Yocto_Project_User's_Guide.pdf](https://www.nxp.com/docs/en/user-guide/IMX_YOCTO_PROJECT_USERS_GUIDE.pdf). It is continously updated by
-NXP as new software versions are released, and may therefore apply to a version later than 5.15.5-1.0.0.
-NXP provides further documentation for the specific release [5.15.5-1.0.0](https://www.nxp.com/webapp/Download?colCode=L5.15.5_1.0.0_LINUX_DOCS) targeted by this readme.
+NXP as new software versions are released, and may therefore apply to a version later than 5.15.71-2.2.0.
+NXP provides further documentation for the specific release [5.15.71-2.2.0](https://www.nxp.com/webapp/Download?colCode=L5.15.71_2.2.0_LINUX_DOCS) targeted by this readme.
 
 The user's guide includes information about how to establish the yocto working environment and details about NXP yocto builds.
 
@@ -28,15 +28,15 @@ Supported boards:
 -----------------
 This Basler Camera Enablement Package supports the following NXP i.MX8 boards:
 
-- imx8mmevk (NXP: 8MMINILPD4-EVK)
-- imx8mmddr4evk (NXP: 8MMINID4-EVK)
-- imx8mpevk (NXP: 8MPLUSLPD4-EVK)
-- imx8mqevk (NXP: MCIMX8M-EVKB (B Silicon))
+- imx8mm-lpddr4-evk (NXP: 8MMINILPD4-EVK)
+- imx8mm-ddr4-evk (NXP: 8MMINID4-EVK)
+- imx8mp-lpddr4-evk (NXP: 8MPLUSLPD4-EVK)
+- imx8mq-evk (NXP: MCIMX8M-EVKB (B Silicon))
 
 
 To build a yocto image for a NXP i.MX8 board
 ---------------------------------------------
-1.  Create a new working folder for the yocto sources and images from the Basler MIPI camera and the NXP i.MX8 board.
+1.  Create a new working folder for the yocto sources and images from the Basler MIPI camera and the NXP i.MX8 board:
     ```
         $ mkdir imx-yocto-bsp
     ```
@@ -44,19 +44,19 @@ To build a yocto image for a NXP i.MX8 board
 2.  Check out the NXP imx yocto Board Support Package (BSP) to the working folder and grab all sources:
     ```
         $ cd imx-yocto-bsp
-        $ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-honister -m imx-5.15.5-1.0.0.xml
+        $ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-kirkstone -m imx-5.15.71-2.2.0.xml
         $ repo sync
     ```
 
-3.  Add the basler meta layers
+3.  Add the basler meta layers:
     ```
         $ cd imx-yocto-bsp/sources
-        $ git clone --branch honister https://github.com/basler/meta-basler-tools.git
-        $ git clone --branch honister-5.15.5-1.0.0 https://github.com/basler/meta-basler-imx8.git
+        $ git clone --branch kirkstone https://github.com/basler/meta-basler-tools.git
+        $ git clone --branch kirkstone-5.15.71-2.2.0 https://github.com/basler/meta-basler-imx8.git
     ```
 
 4.  Set the DISTRO and MACHINE variables and do the fsl setup.
-    `<machine>` can be one of imx8mmevk, imx8mmddr4evk, imx8mpevk, imx8mqevk
+    `<machine>` can be one of imx8mm-lpddr4-evk, imx8mm-ddr4-evk, imx8mp-lpddr4-evk, imx8mq-evk:
     ```
         $ cd imx-yocto-bsp
         $ DISTRO=fsl-imx-xwayland MACHINE=<machine> source imx-setup-release.sh -b build-xwayland-<machine>
@@ -70,20 +70,20 @@ To build a yocto image for a NXP i.MX8 board
     ```
 
 6.  Please read the license files in `imx-yocto-bsp/sources/meta-basler-*/licenses/`. To accept the licenses and to 
-    install the required packages, append the following lines to  `imx-yocto-bsp/build-xwayland-<MACHINE>/conf/local.conf`:
+    install the required packages, append the following lines to `imx-yocto-bsp/build-xwayland-<MACHINE>/conf/local.conf`:
     ```
         ACCEPT_BASLER_EULA = "1"
-        IMAGE_INSTALL:append = "packagegroup-dart-bcon-mipi"
+        IMAGE_INSTALL:append = " packagegroup-dart-bcon-mipi"
     ```
 
 7.  Call bitbake to create the required image.
     Building the image can take several hours.
-    For minimal testing
+    For minimal testing:
     ```
         $ cd imx-yocto-bsp/build-xwayland-<MACHINE>/
         $ bitbake imx-image-multimedia
     ```
-    Including all machine learning support
+    Including all machine learning support:
     ```
         $ cd imx-yocto-bsp/build-xwayland-<MACHINE>/
         $ bitbake imx-image-full
@@ -139,7 +139,7 @@ To build a yocto image for a NXP i.MX8 board
 
         The following table lists all possible combinations of SoC and cameras.
 
-        **imx8mp**
+        **imx8mp-lpddr4**
 
         | Device tree file name                 | Camera on CSI1                          | Camera on CSI2                        |
         | ------------------------------------- | --------------------------------------- | ------------------------------------- |
@@ -149,13 +149,13 @@ To build a yocto image for a NXP i.MX8 board
         | `imx8mp-evk-basler-isi0.dtb`          | with ISP, max width 4096 pix            | --                                    |
         | `imx8mp-evk-basler-isi0-isi1.dtb`     | with ISP, max width 2048 pix            | with ISP, max width 2048 pix           |
 
-        **imx8mm**
+        **imx8mm-lpddr4**
 
         | Device tree file name                 | Camera on CSI1               | Camera on CSI2               |
         | ------------------------------------- | ---------------------------- | ---------------------------- |
         | `imx8mm-evk-basler-camera.dtb`        | with ISP                     | -- (no second csi port)      |
 
-        **imx8mmddr4**
+        **imx8mm-ddr4**
 
         | Device tree file name                 | Camera on CSI1               | Camera on CSI2               |
         | ------------------------------------- | ---------------------------- | ---------------------------- |
@@ -207,7 +207,7 @@ Supplementary Information
         $ bitbake -c populate_sdk fsl-image-validation-imx
     ```
 
--   remote X support: In order to establish a remote ssh -X session call on host
+-   remote X support: In order to establish a remote ssh -X session call on host:
     ```
         $ ssh -X root@<ip-address>
         # Once the remote connection is established call

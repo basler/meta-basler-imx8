@@ -1,4 +1,4 @@
-From 6a58205b19ecb734804cef592bf288403d258ad6 Mon Sep 17 00:00:00 2001
+From ad9779dcbbf19a321db1032a63f790f23fe46c95 Mon Sep 17 00:00:00 2001
 From: Michael Singer <michael.singer@baslerweb.com>
 Date: Thu, 14 Nov 2019 18:59:13 +0100
 Subject: [PATCH 01/20] [imx8mm, imx8mq] make sensor controls available in
@@ -6,12 +6,6 @@ Subject: [PATCH 01/20] [imx8mm, imx8mq] make sensor controls available in
 
 Our sensor driver provides V4L Extended Controls that need to be made available
 through the /dev/videoX file.
-
-v1 -> v2 (Marvin Schmidt):
-
-Port to 5.4.3 and adjust to the following API changes:
-  * v4l2_ctrl_add_handler
-  * v4l2_{try,g,s}_ext_ctrls
 ---
  drivers/media/platform/imx8/mxc-mipi-csi2.h   |   3 +
  .../media/platform/imx8/mxc-mipi-csi2_yav.c   |  17 ++-
@@ -101,7 +95,7 @@ index 9fa951b50..fa3fbef37 100644
  	return 0;
  }
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index 39bef1e16..a6e631bf6 100644
+index 84f0e40e4..a41516eea 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -1677,6 +1677,102 @@ static int mx6s_vidioc_enum_frameintervals(struct file *file, void *priv,
@@ -232,7 +226,7 @@ index 39bef1e16..a6e631bf6 100644
  	return ret;
  }
 diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-index db9101f57..f0ddcc1f5 100644
+index a722f38fe..3e543cfa5 100644
 --- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 +++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 @@ -38,6 +38,7 @@
@@ -253,8 +247,8 @@ index db9101f57..f0ddcc1f5 100644
  
  /**
 @@ -935,6 +938,9 @@ static int subdev_notifier_bound(struct v4l2_async_notifier *notifier,
- 	if (subdev == NULL)
- 		return -EINVAL;
+ 	if (state->fwnode == dev_fwnode(subdev->dev))
+ 		state->sensor_sd = subdev;
  
 +	v4l2_ctrl_add_handler(state->mipi_sd.ctrl_handler, subdev->ctrl_handler,
 +		  NULL, true);
@@ -302,5 +296,5 @@ index db9101f57..f0ddcc1f5 100644
  	pm_runtime_disable(&pdev->dev);
  	mipi_csis_pm_suspend(&pdev->dev, true);
 -- 
-2.33.1
+2.34.1
 

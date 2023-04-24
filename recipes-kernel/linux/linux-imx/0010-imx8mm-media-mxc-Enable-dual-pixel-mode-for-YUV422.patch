@@ -1,4 +1,4 @@
-From ce99b3c55d1a1381543c468ed407125040e50ac4 Mon Sep 17 00:00:00 2001
+From e346e533fe42add2865663286d45d01bcddb138d Mon Sep 17 00:00:00 2001
 From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
 Date: Tue, 17 Dec 2019 18:10:27 +0100
 Subject: [PATCH 10/20] [imx8mm] media: mxc: Enable dual pixel mode for YUV422
@@ -32,7 +32,7 @@ or not
  2 files changed, 6 insertions(+)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index bf0c85e3c..7b31d86dd 100644
+index 1ea7b6b57..046ebc3fc 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -902,6 +902,7 @@ static int mx6s_configure_csi(struct mx6s_csi_dev *csi_dev)
@@ -44,7 +44,7 @@ index bf0c85e3c..7b31d86dd 100644
  		case V4L2_PIX_FMT_SRGGB8:
  		case V4L2_PIX_FMT_SBGGR8:
 diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-index 8e8c09288..c50ad3a0b 100644
+index a3df0795e..96ee485d9 100644
 --- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 +++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 @@ -483,6 +483,11 @@ static void __mipi_csis_set_format(struct csi_state *state)
@@ -60,5 +60,5 @@ index 8e8c09288..c50ad3a0b 100644
  
  	/* Pixel resolution */
 -- 
-2.33.1
+2.34.1
 

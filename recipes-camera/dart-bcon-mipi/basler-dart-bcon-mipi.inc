@@ -1,9 +1,13 @@
 SUMMARY = "Basler dart BCON for MIPI GenTL producer"
 PR = "r0"
 
+LICENSE = "Basler-SLA-02 & BSD-3-Clause & OpenSSL"
+LIC_FILES_CHKSUM ?= "file://opt/dart-bcon-mipi/share/doc/${PN}/copyright;md5=ff8962a0d69b960bd5b0a2bd0c97c184"
+
 PACKAGE_FILE_NAME="${BPN}_${PV}_arm64.selfsh"
 
-SRC_URI = "https://artifacts.baslerweb.com/artifactory/embedded-vision-public/packages/${BPN}/${PACKAGE_FILE_NAME};name=tarball \
+SELFSH_SRC_URI = "https://artifacts.baslerweb.com/artifactory/embedded-vision-public/packages/${BPN}/${PACKAGE_FILE_NAME}"
+SRC_URI = "${SELFSH_SRC_URI};name=tarball \
            file://set-gentl-path.sh \
 "
 
@@ -13,13 +17,12 @@ INSANE_SKIP:${PN} = "ldflags"
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
 INHIBIT_PACKAGE_STRIP = "1"
 
-RDEPENDS:${PN} = "\
-    kernel-module-basler-camera \
-"
+RDEPENDS:${PN} = "kernel-module-basler-camera"
 
 RRECOMMENDS:${PN} = "\
     pylon \
     python3-pypylon \
+    gst-plugin-pylon \
 "
 
 python check_basler_eula() {

@@ -1,4 +1,4 @@
-From e3eddc160f77b8df2bf22f7f414db11516df05b6 Mon Sep 17 00:00:00 2001
+From 5e3bf9ad1277c243d2432eed7957ccfe8a8bbcd5 Mon Sep 17 00:00:00 2001
 From: "Koeller, Thomas" <Thomas.Koeller@baslerweb.com>
 Date: Fri, 11 Dec 2020 15:19:36 +0100
 Subject: [PATCH 17/20] [imx8mq] arm64: dts: imx8mq: Added highspeed device
@@ -56,5 +56,5 @@ index 000000000..388a90630
 +	link-frequencies = /bits/ 64 <600000000>;
 +};
 -- 
-2.33.1
+2.34.1
 

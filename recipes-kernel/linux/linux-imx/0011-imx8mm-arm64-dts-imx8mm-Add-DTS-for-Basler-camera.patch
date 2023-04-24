@@ -1,4 +1,4 @@
-From 1f9beffe53e533cefe8a884e6b4a7c24a50c7c46 Mon Sep 17 00:00:00 2001
+From 6ea5835e1ae7f49339187ec60df64635693deebd Mon Sep 17 00:00:00 2001
 From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
 Date: Wed, 29 Jan 2020 13:52:03 +0100
 Subject: [PATCH 11/20] [imx8mm] arm64: dts: imx8mm: Add DTS for Basler camera
@@ -10,11 +10,11 @@ Subject: [PATCH 11/20] [imx8mm] arm64: dts: imx8mm: Add DTS for Basler camera
  create mode 100644 arch/arm64/boot/dts/freescale/imx8mm-evk-basler-camera.dts
 
 diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
-index 096097942..9bfb76f29 100644
+index 9a7319c6b..8615d2525 100644
 --- a/arch/arm64/boot/dts/freescale/Makefile
 +++ b/arch/arm64/boot/dts/freescale/Makefile
-@@ -234,3 +234,5 @@ dtb-$(CONFIG_ARCH_MXC) += imx8qm-mek-sof-cs42888.dtb imx8qm-mek-sof-wm8960.dtb
- dtb-$(CONFIG_ARCH_MXC) += imx8dxl-evk-root.dtb imx8dxl-evk-inmate.dtb
+@@ -238,3 +238,5 @@ dtb-$(CONFIG_ARCH_MXC) += imx93-9x9-qsb.dtb \
+ 			  imx93-9x9-qsb-mt9m114.dtb
  dtb-$(CONFIG_ARCH_S32) += s32v234-evb.dtb \
  			  s32v234-sbc.dtb
 +
@@ -90,5 +90,5 @@ index 000000000..b9a419983
 +	};
 +};
 -- 
-2.33.1
+2.34.1
 

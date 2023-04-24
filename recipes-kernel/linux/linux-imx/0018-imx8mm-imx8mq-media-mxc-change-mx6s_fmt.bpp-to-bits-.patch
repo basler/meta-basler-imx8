@@ -1,4 +1,4 @@
-From f8339c147e7559e54cfdb623184efa05a7332de1 Mon Sep 17 00:00:00 2001
+From d3329f322a8eeaf41c17510fa9ae7190230ce98c Mon Sep 17 00:00:00 2001
 From: Tobias Klinke <TobiasAlexander.Klinke@baslerweb.com>
 Date: Fri, 12 Feb 2021 12:08:41 +0100
 Subject: [PATCH 18/20] [imx8mm, imx8mq] media: mxc: change mx6s_fmt.bpp to
@@ -12,7 +12,7 @@ which will be 12 bits per pixel.
  1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index e2b2fe794..1e4fc655d 100644
+index 5c2727eb7..9c4d81c0d 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -275,43 +275,43 @@ static struct mx6s_fmt formats[] = {
@@ -78,5 +78,5 @@ index e2b2fe794..1e4fc655d 100644
  	pix->colorspace = V4L2_COLORSPACE_SRGB;
  	pix->ycbcr_enc = V4L2_MAP_YCBCR_ENC_DEFAULT(pix->colorspace);
 -- 
-2.33.1
+2.34.1
 

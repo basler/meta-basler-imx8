@@ -1,4 +1,4 @@
-From 832a7600ebb44742a9bb98ac81b115a8ca418bf5 Mon Sep 17 00:00:00 2001
+From bcda16c1c51e1ef516fcd2663ea21ebb8a71b673 Mon Sep 17 00:00:00 2001
 From: Stefan Klug <stefan.klug@baslerweb.com>
 Date: Wed, 22 Dec 2021 14:59:30 +0100
 Subject: [PATCH 20/20] [imx8mp] arm64: dts: imx8mp: Add DTS for Basler camera
@@ -14,10 +14,10 @@ Subject: [PATCH 20/20] [imx8mp] arm64: dts: imx8mp: Add DTS for Basler camera
  create mode 100644 arch/arm64/boot/dts/freescale/imx8mp-evk-basler-mixed-isp-isi.dts
 
 diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
-index 87006db85..a7f8e3c79 100644
+index 57f7b5298..5de539aa9 100644
 --- a/arch/arm64/boot/dts/freescale/Makefile
 +++ b/arch/arm64/boot/dts/freescale/Makefile
-@@ -116,8 +116,10 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it626
+@@ -105,8 +105,10 @@ dtb-$(CONFIG_ARCH_MXC) += imx8mp-evk.dtb imx8mp-evk-rm67191.dtb imx8mp-evk-it626
  			  imx8mp-evk-pcie-ep.dtb  imx8mp-evk-rpmsg.dtb imx8mp-evk-ecspi-slave.dtb \
  			  imx8mp-evk-jdi-wuxga-lvds-panel.dtb imx8mp-evk-flexcan2.dtb \
  			  imx8mp-evk-root.dtb imx8mp-evk-inmate.dtb imx8mp-evk-ov2775.dtb \
@@ -27,7 +27,7 @@ index 87006db85..a7f8e3c79 100644
 +			  imx8mp-evk-basler-mixed-isp-isi.dtb \
  			  imx8mp-evk-dual-ov2775.dtb imx8mp-evk-spdif-lb.dtb \
  			  imx8mp-evk-sof-wm8960.dtb imx8mp-evk-dsp.dtb \
- 			  imx8mp-evk-iqaudio-dacplus.dtb imx8mp-evk-iqaudio-dacpro.dtb imx8mp-evk-hifiberry-dacplus.dtb \
+ 			  imx8mp-evk-os08a20-ov5640.dtb imx8mp-evk-os08a20.dtb \
 diff --git a/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts b/arch/arm64/boot/dts/freescale/imx8mp-evk-basler-isi0-isi1.dts
 new file mode 100644
 index 000000000..8a5f2b1ac
@@ -357,5 +357,5 @@ index 000000000..923083ef1
 +	status = "okay";
 +};
 -- 
-2.33.1
+2.34.1
 

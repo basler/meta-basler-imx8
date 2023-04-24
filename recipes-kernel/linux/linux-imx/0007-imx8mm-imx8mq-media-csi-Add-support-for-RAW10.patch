@@ -1,4 +1,4 @@
-From dd76016d7062e2a67bc4afa57c7e7bc0cc3cb1dc Mon Sep 17 00:00:00 2001
+From 166153d2292a0dce3b12300f0b409dd441381d25 Mon Sep 17 00:00:00 2001
 From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
 Date: Tue, 17 Dec 2019 17:03:53 +0100
 Subject: [PATCH 07/20] [imx8mm, imx8mq] media: csi: Add support for RAW10
@@ -9,7 +9,7 @@ Subject: [PATCH 07/20] [imx8mm, imx8mq] media: csi: Add support for RAW10
  2 files changed, 32 insertions(+)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index ab6d7ed26..eba3880de 100644
+index dea9858f6..afa48fdea 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -272,6 +272,18 @@ static struct mx6s_fmt formats[] = {
@@ -69,7 +69,7 @@ index ab6d7ed26..eba3880de 100644
  			pr_debug("   fmt not supported\n");
  			return -EINVAL;
 diff --git a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
-index 912cf2fa6..6e337f241 100644
+index b6e2fe3ec..43ae272df 100644
 --- a/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 +++ b/drivers/media/platform/mxc/capture/mxc_mipi_csi.c
 @@ -324,6 +324,10 @@ static const struct csis_pix_format mipi_csis_formats[] = {
@@ -84,5 +84,5 @@ index 912cf2fa6..6e337f241 100644
  };
  
 -- 
-2.33.1
+2.34.1
 

@@ -174,4 +174,8 @@ fi
 
 echo "Starting isp_media_server with configuration $STARTMODE "
 cd ${RUN_SCRIPT_PATH}
+
+# help the GenTL Producers to use the appropriate JSON API
+./isp_media_server -v | grep ^Version >/var/run/vvcam-json-api.txt
+
 ./isp_media_server $STARTMODE

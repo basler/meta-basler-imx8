@@ -12,19 +12,19 @@ patch_uboot_defconfig () {
     echo 'CONFIG_DEFAULT_FDT_FILE="'$2'"' >>${S}/configs/$1
 }
 
-do_configure:prepend:imx8mqevk () {
+do_configure:prepend:imx8mq-evk () {
     patch_uboot_defconfig imx8mq_evk_defconfig imx8mq-evk-basler-camera.dtb
 }
 
-do_configure:prepend:imx8mmevk () {
+do_configure:prepend:imx8mm-lpddr4-evk () {
     patch_uboot_defconfig imx8mm_evk_defconfig imx8mm-evk-basler-camera.dtb
 }
 
-do_configure:prepend:imx8mpevk () {
+do_configure:prepend:imx8mp-lpddr4-evk () {
     patch_uboot_defconfig imx8mp_evk_defconfig imx8mp-evk-basler.dtb
 }
 
-do_configure:prepend:imx8mmddr4evk () {
+do_configure:prepend:imx8mm-ddr4-evk () {
     patch_uboot_defconfig imx8mm_ddr4_evk_defconfig imx8mm-ddr4-evk-basler-camera.dtb
 }
 

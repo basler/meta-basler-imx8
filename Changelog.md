@@ -1,6 +1,15 @@
 Changelog for meta-basler-imx8
 ==============================
 
+## 2023.04.24
+* Added: Support for yocto kirkstone-5.15.71-2.2.0
+* Updated: Use GenTL Producers version 3.0.0
+* Updated: imx8mp: Use imx-isp drivers version 4.2.2.20.0-5.3.3
+* Fixed: imx8mp: imx-isp: Missing RDEPENDS to bash and i2c-tools
+* Fixed: imx8mp: basler-daa2500-60mc-vvcam: RDEPENDS incomplete
+* Fixed: imx8mp: basler-daa3840-30mc-vvcam: RDEPENDS incomplete
+* Fixed: imx8mp: basler-daa3840-30mc-notrigger-vvcam: RDEPENDS incomplete
+
 ## 2022.10.26
 * Improved README
 

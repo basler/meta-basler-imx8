@@ -11,7 +11,7 @@ RDEPENDS:packagegroup-dart-bcon-mipi = "\
     basler-daa4200-30mci \
 "
 
-RDEPENDS:packagegroup-dart-bcon-mipi:append:mx8mp = "\
+RDEPENDS:packagegroup-dart-bcon-mipi:append:mx8mp-nxp-bsp = "\
     basler-daa2500-60mc-vvcam \
     basler-daa3840-30mc-vvcam \
     basler-daa3840-30mc-notrigger-vvcam \

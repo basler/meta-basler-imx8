@@ -1,4 +1,4 @@
-From 2cd46dec39c4d3c670c3cf5c8fd23c0b3b428d85 Mon Sep 17 00:00:00 2001
+From ea3139a9002ba0061a9c9bc805d91a85704239ed Mon Sep 17 00:00:00 2001
 From: sebastian suesens <sebastian.suesens@baslerweb.com>
 Date: Tue, 14 May 2019 13:27:10 +0200
 Subject: [PATCH 04/20] [imx8mm, imx8mq] increase max video memory from 64 to
@@ -11,7 +11,7 @@ without the patch only to 2 buffers at 13MP are supported
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/drivers/media/platform/mxc/capture/mx6s_capture.c b/drivers/media/platform/mxc/capture/mx6s_capture.c
-index 9c2c69792..cbd4cb4c0 100644
+index 19d65de50..340bbb8e2 100644
 --- a/drivers/media/platform/mxc/capture/mx6s_capture.c
 +++ b/drivers/media/platform/mxc/capture/mx6s_capture.c
 @@ -50,7 +50,7 @@
@@ -24,5 +24,5 @@ index 9c2c69792..cbd4cb4c0 100644
  /* reset values */
  #define CSICR1_RESET_VAL	0x40000800
 -- 
-2.33.1
+2.34.1
 

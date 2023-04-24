@@ -1,3 +1,6 @@
+DESCRIPTION = "Basler camera binary drivers"
+LICENSE = "Proprietary"
+LIC_FILES_CHKSUM = "file://COPYING;md5=2383fee3f7f91dfa72b970b1bf0d8de4"
 
 PACKAGE_FILE_NAME="${BPN}_${PV}_arm64.selfsh"
 

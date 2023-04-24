@@ -1,5 +1,5 @@
 SUMMARY = "Basler camera sensor driver"
-LICENSE = "GPLv2"
+LICENSE = "GPL-2.0-only"
 LIC_FILES_CHKSUM = "file://../COPYING;md5=288618fe39e7689c3712691843e7c40c"
 
 inherit module

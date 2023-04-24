@@ -1,4 +1,4 @@
-From c2915e183e4eacca6bb7529e705f0c90627b07f0 Mon Sep 17 00:00:00 2001
+From de78e6873a145d43c14b09457ab2dfa012b7be4f Mon Sep 17 00:00:00 2001
 From: Marvin Schmidt <Marvin.Schmidt@baslerweb.com>
 Date: Wed, 22 Apr 2020 08:58:15 +0200
 Subject: [PATCH 14/20] [imx8mm] arm64: dts: imx8mm: Add DT variants using one
@@ -13,10 +13,10 @@ Subject: [PATCH 14/20] [imx8mm] arm64: dts: imx8mm: Add DT variants using one
  create mode 100644 arch/arm64/boot/dts/freescale/imx8mm-evk-basler-camera-1lane.dts
 
 diff --git a/arch/arm64/boot/dts/freescale/Makefile b/arch/arm64/boot/dts/freescale/Makefile
-index 10ea4c42f..87006db85 100644
+index a7abcd330..57f7b5298 100644
 --- a/arch/arm64/boot/dts/freescale/Makefile
 +++ b/arch/arm64/boot/dts/freescale/Makefile
-@@ -236,7 +236,9 @@ dtb-$(CONFIG_ARCH_S32) += s32v234-evb.dtb \
+@@ -240,7 +240,9 @@ dtb-$(CONFIG_ARCH_S32) += s32v234-evb.dtb \
  			  s32v234-sbc.dtb
  
  dtb-$(CONFIG_ARCH_MXC) += imx8mm-evk-basler-camera.dtb \
@@ -167,5 +167,5 @@ index 000000000..28ef2752e
 +	};
 +};
 -- 
-2.33.1
+2.34.1
 
