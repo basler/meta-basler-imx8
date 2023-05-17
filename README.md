@@ -44,7 +44,7 @@ To build a yocto image for a NXP i.MX8 board
 2.  Check out the NXP imx yocto Board Support Package (BSP) to the working folder and grab all sources:
     ```
         $ cd imx-yocto-bsp
-        $ repo init -u https://source.codeaurora.org/external/imx/imx-manifest -b imx-linux-kirkstone -m imx-5.15.71-2.2.0.xml
+        $ repo init -u https://github.com/nxp-imx/imx-manifest -b imx-linux-kirkstone -m imx-5.15.71-2.2.0.xml
         $ repo sync
     ```
 

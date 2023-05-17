@@ -1,6 +1,9 @@
 Changelog for meta-basler-imx8
 ==============================
 
+## 2023.05.16
+* Fixed: Readme: Wrong URL in "repo init" call
+
 ## 2023.04.24
 * Added: Support for yocto kirkstone-5.15.71-2.2.0
 * Updated: Use GenTL Producers version 3.0.0
