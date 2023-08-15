@@ -1,0 +1,38 @@
+From 5cc8288bcb0fb27741e44847fc1d9b2395ab82fb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?R=C3=BCdiger=20K=C3=B6pke?= <Ruediger.Koepke@baslerweb.com>
+Date: Thu, 6 Jul 2023 13:42:31 +0200
+Subject: [PATCH 1/2] VSI: Remove unused completion struct per file handle
+ (NFC)
+
+---
+ vvcam/v4l2/video/video.c | 1 -
+ vvcam/v4l2/video/video.h | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/vvcam/v4l2/video/video.c b/vvcam/v4l2/video/video.c
+index daa6742..da824af 100644
+--- a/vvcam/v4l2/video/video.c
++++ b/vvcam/v4l2/video/video.c
+@@ -528,7 +528,6 @@ static int video_open(struct file *file)
+ 		return rc;
+ 	}
+ 	mutex_init(&handle->buffer_mutex);
+-	init_completion(&handle->wait);
+ 
+ #ifdef CONFIG_VIDEOBUF2_DMA_CONTIG
+ 	INIT_LIST_HEAD(&handle->extdmaqueue);
+diff --git a/vvcam/v4l2/video/video.h b/vvcam/v4l2/video/video.h
+index 4c0cb94..4a0a8fa 100644
+--- a/vvcam/v4l2/video/video.h
++++ b/vvcam/v4l2/video/video.h
+@@ -136,7 +136,6 @@ struct viv_video_file {
+ 	bool capsqueried;
+ 	struct vb2_queue queue;
+ 	struct mutex buffer_mutex;
+-	struct completion wait;
+ 	struct list_head entry;
+ 	struct viv_video_device *vdev;
+ 	int pipeline;
+-- 
+2.34.1
+

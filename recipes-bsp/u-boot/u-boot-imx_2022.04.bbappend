@@ -5,26 +5,12 @@ PARALLEL_MAKE = ""
 PARALLEL_MAKEINST = ""
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/u-boot-imx:"
-SRC_URI:append:imx8mqevk = " file://0001-add-CONFIG_DEFAULT_FDT_FILE-to-imx8mq_evk-in-u-boot.patch"
+SRC_URI:append:imx8mq-evk = " file://0001-add-CONFIG_DEFAULT_FDT_FILE-to-imx8mq_evk-in-u-boot.patch"
 
-patch_uboot_defconfig () {
-    sed -i -e '/^[	 ]*CONFIG_DEFAULT_FDT_FILE[	 ]*=/d' ${S}/configs/$1
-    echo 'CONFIG_DEFAULT_FDT_FILE="'$2'"' >>${S}/configs/$1
-}
-
-do_configure:prepend:imx8mq-evk () {
-    patch_uboot_defconfig imx8mq_evk_defconfig imx8mq-evk-basler-camera.dtb
-}
-
-do_configure:prepend:imx8mm-lpddr4-evk () {
-    patch_uboot_defconfig imx8mm_evk_defconfig imx8mm-evk-basler-camera.dtb
-}
-
-do_configure:prepend:imx8mp-lpddr4-evk () {
-    patch_uboot_defconfig imx8mp_evk_defconfig imx8mp-evk-basler.dtb
-}
-
-do_configure:prepend:imx8mm-ddr4-evk () {
-    patch_uboot_defconfig imx8mm_ddr4_evk_defconfig imx8mm-ddr4-evk-basler-camera.dtb
-}
-
+# We intentionally don't use SRC_URI:append:${MACHINE} = " file://${MACHINE}-basler.cfg " here, 
+# because key expansion on the left side happens at a later stage and would destroy the order of 
+# a similar override in the next bbappend
+SRC_URI:append:imx8mm-ddr4-evk = " file://imx8mm-ddr4-evk-basler.cfg "
+SRC_URI:append:imx8mm-lpddr4-evk = " file://imx8mm-lpddr4-evk-basler.cfg "
+SRC_URI:append:imx8mp-lpddr4-evk = " file://imx8mp-lpddr4-evk-basler.cfg "
+SRC_URI:append:imx8mq-evk = " file://imx8mq-evk-basler.cfg "

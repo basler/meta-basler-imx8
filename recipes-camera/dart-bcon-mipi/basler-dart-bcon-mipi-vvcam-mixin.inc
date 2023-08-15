@@ -2,9 +2,10 @@ LIC_FILES_CHKSUM = "file://opt/dart-bcon-mipi/share/doc/${PN}/copyright;md5=ff89
 
 def get_model_name(pn):
     import re
-    pattern = r"basler-(daa\d+)-(\d+mc).*?(-vvcam)?"
+
+    # strip leading "basler-" and trailing "[-notrigger]-vvcam"
+    pattern = r"basler-(daa\d+-\d+mc[^-]*)"
     m = re.match(pattern, pn)
-    model_name = f"{m.group(1)}-{m.group(2)}"
-    return model_name
+    return f"{m.group(1)}"
 
 RDEPENDS:${PN} += "basler-${@get_model_name(d.getVar('PN'))}-imx-isp-driver imx-gpu-g2d"

@@ -1,0 +1,106 @@
+From 630c2657ff532d9517506bee5c9ed47692e37220 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?R=C3=BCdiger=20K=C3=B6pke?= <Ruediger.Koepke@baslerweb.com>
+Date: Thu, 6 Jul 2023 13:44:08 +0200
+Subject: [PATCH 2/2] VSI: Improve slow v4l2 event handling
+
+In p19 the handling of syncronized event completion has been replaced by polling a variable (event_shm.complete) from the video device.
+In our case the used msleep(1) slept about 10 ms, see Documentation/timers/timers-howto.rst, and led to a slow event runtime.
+The current implementation uses the kernel "wait for completion" functions as before, but in the scope of the device, not the file handle.
+---
+ vvcam/common/viv_video_kevent.h |  5 -----
+ vvcam/v4l2/video/video.c        | 32 ++++++--------------------------
+ vvcam/v4l2/video/video.h        |  1 -
+ 3 files changed, 6 insertions(+), 32 deletions(-)
+
+diff --git a/vvcam/common/viv_video_kevent.h b/vvcam/common/viv_video_kevent.h
+index 33b82e7..735134a 100644
+--- a/vvcam/common/viv_video_kevent.h
++++ b/vvcam/common/viv_video_kevent.h
+@@ -184,11 +184,6 @@ struct viv_caps_mode_info_s{
+ 	unsigned int fps;
+ };
+ 
+-struct video_event_shm {
+-	uint32_t complete;
+-	int32_t  result;
+-};
+-
+ #define VIV_CAPS_MODE_MAX_COUNT    20
+ struct viv_caps_supports{
+ 	unsigned int count;
+diff --git a/vvcam/v4l2/video/video.c b/vvcam/v4l2/video/video.c
+index da824af..6e39dd7 100644
+--- a/vvcam/v4l2/video/video.c
++++ b/vvcam/v4l2/video/video.c
+@@ -211,26 +211,6 @@ static int video_event_subscribed(struct video_device *vdev,
+ 	return 0;
+ }
+ 
+-static int viv_event_wait_complete(struct viv_video_device *vdev,
+-								   struct v4l2_event *event)
+-{
+-	int timeout_ms = 1000;
+-	int i = 0;
+-
+-	for (i = 0; i < timeout_ms; i++) {
+-		if (vdev->event_shm.complete)
+-			return 0;
+-		if (video_event_subscribed(vdev->video, event) == true) {
+-			msleep(1);
+-		} else {
+-			return -EINVAL;
+-		}
+-
+-	}
+-
+-	return -ETIMEDOUT;
+-}
+-
+ static int viv_v4l2_post_event(struct viv_video_device *vdev,
+ 		struct v4l2_event *event, bool sync)
+ {
+@@ -250,15 +230,15 @@ static int viv_v4l2_post_event(struct viv_video_device *vdev,
+ 
+ 	mutex_lock(&vdev->event_lock);
+ 
+-	if (sync) {
+-		vdev->event_shm.complete = 0;
+-		vdev->event_shm.result = 0;
+-	}
++	if (sync)
++		reinit_completion(&vdev->ctrls.wait);
+ 
+ 	v4l2_event_queue(vdev->video, event);
+ 
+ 	if (sync) {
+-		ret = viv_event_wait_complete(vdev, event);
++		if (wait_for_completion_timeout(&vdev->ctrls.wait, msecs_to_jiffies(
++				VIV_VIDEO_EVENT_TIMOUT_MS)) == 0)
++			ret = -ETIMEDOUT;
+ 	}
+ 
+ 	mutex_unlock(&vdev->event_lock);
+@@ -889,7 +869,7 @@ static long private_ioctl(struct file *file, void *fh,
+ 
+ 	switch (cmd) {
+ 	case VIV_VIDIOC_EVENT_COMPLETE:
+-		dev->event_shm.complete = 1;
++		complete(&dev->ctrls.wait);
+ 		break;
+ 	case VIV_VIDIOC_S_STREAMID:
+ 		pr_debug("priv ioctl VIV_VIDIOC_S_STREAMID\n");
+diff --git a/vvcam/v4l2/video/video.h b/vvcam/v4l2/video/video.h
+index 4a0a8fa..66e9e39 100644
+--- a/vvcam/v4l2/video/video.h
++++ b/vvcam/v4l2/video/video.h
+@@ -123,7 +123,6 @@ struct viv_video_device {
+ 	int dumpbuf_status;
+ 	struct vb2_dc_buf* dumpbuf;
+ 	struct mutex event_lock;
+-	struct video_event_shm event_shm;
+ 	int pipeline_status;
+ };
+ 
+-- 
+2.34.1
+

@@ -1,6 +1,13 @@
 Changelog for meta-basler-imx8
 ==============================
 
+## 2023.07.06
+* Fixed: imx8mp: isp-vvcam: V4L2 event processing is slow
+
+## 2023.07.02
+* Fixed: Default fdt file on imx8mq was not set properly
+* Fixed: Model name matching for custom cameras failed
+
 ## 2023.05.16
 * Fixed: Readme: Wrong URL in "repo init" call
 
